@@ -118,25 +118,34 @@ d3.json(platesUrl).then(data => {
  *  Description: function to return a magnified size of an earthquake's magnitude for use of leaflet marker size
  */
 function markerSize(magnitude) {
-    return magnitude * 10000;
+    return magnitude * 2;
 };
 
-// geoJSON Marker Options
-var geojsonMarkerOptions = {
-    radius: 8,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-};
+// d3 converters for epoch time
+var dateFormat = d3.timeFormat("%x %X")
 
 // Hour
 d3.json(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson`).then(data => {
     dataLayers.pastHour.addLayer(
         L.geoJSON(data, {
             pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
+                return L.circleMarker(latlng, {
+                    stroke: false,
+                    fillOpacity: 0.5,
+                    color: "red",
+                    fillColor: "red",
+                    radius: markerSize(feature.properties.mag)
+                });
+            },
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(
+                    `<center>
+                    <b>EARTHQUAKE</b><br>
+                    Magnitude: ${feature.properties.mag}<br>
+                    Date/Time: ${dateFormat(feature.properties.time)}<br>
+                    Coordinates: ${feature.geometry.coordinates[0]}, ${feature.geometry.coordinates[1]}<br>
+                    Location: ${feature.properties.title}<br>
+                    </center>`);
             }
         })
     )
@@ -148,7 +157,23 @@ d3.json(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojs
     dataLayers.pastDay.addLayer(
         L.geoJSON(data, {
             pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
+                return L.circleMarker(latlng, {
+                    stroke: false,
+                    fillOpacity: 0.5,
+                    color: "red",
+                    fillColor: "red",
+                    radius: markerSize(feature.properties.mag)
+                });
+            },
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(
+                    `<center>
+                    <b>EARTHQUAKE</b><br>
+                    Magnitude: ${feature.properties.mag}<br>
+                    Date/Time: ${dateFormat(feature.properties.time)}<br>
+                    Coordinates: ${feature.geometry.coordinates[0]}, ${feature.geometry.coordinates[1]}<br>
+                    Location: ${feature.properties.title}<br>
+                    </center>`);
             }
         })
     )
@@ -160,7 +185,23 @@ d3.json(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     dataLayers.pastSevenDays.addLayer(
         L.geoJSON(data, {
             pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
+                return L.circleMarker(latlng, {
+                    stroke: false,
+                    fillOpacity: 0.5,
+                    color: "red",
+                    fillColor: "red",
+                    radius: markerSize(feature.properties.mag)
+                });
+            },
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(
+                    `<center>
+                    <b>EARTHQUAKE</b><br>
+                    Magnitude: ${feature.properties.mag}<br>
+                    Date/Time: ${dateFormat(feature.properties.time)}<br>
+                    Coordinates: ${feature.geometry.coordinates[0]}, ${feature.geometry.coordinates[1]}<br>
+                    Location: ${feature.properties.title}<br>
+                    </center>`);
             }
         })
     )
@@ -172,7 +213,23 @@ d3.json(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geo
     dataLayers.pastThirtyDays.addLayer(
         L.geoJSON(data, {
             pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
+                return L.circleMarker(latlng, {
+                    stroke: false,
+                    fillOpacity: 0.5,
+                    color: "red",
+                    fillColor: "red",
+                    radius: markerSize(feature.properties.mag)
+                });
+            },
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(
+                    `<center>
+                    <b>EARTHQUAKE</b><br>
+                    Magnitude: ${feature.properties.mag}<br>
+                    Date/Time: ${dateFormat(feature.properties.time)}<br>
+                    Coordinates: ${feature.geometry.coordinates[0]}, ${feature.geometry.coordinates[1]}<br>
+                    Location: ${feature.properties.title}<br>
+                    </center>`);
             }
         })
     )
