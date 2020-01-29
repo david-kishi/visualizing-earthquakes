@@ -93,6 +93,28 @@ var map = L.map("map", {
  */
 L.control.groupedLayers(baseMaps, overlayMaps, options).addTo(map);
 
+/* Legend
+ *  Description: Creating the legend for the map
+ */
+let legend = L.control({
+    position: 'bottomright'
+});
+
+legend.onAdd = function (map) {
+    let div = L.DomUtil.create("div", "legend"),
+        grades = [0, 1, 2, 3, 4, 5],
+        labels = ["0-1", "1-2", "2-3", "3-4", "4-5", "5+"];
+
+    grades.forEach(grade => {
+        div.innerHTML += '<i style="background:' + markerColor(grade) + '"></i> ' +
+            grade + ((grade+1) ? '&ndash;' + (grade+1) + '<br>' : '+');
+    })
+
+    return div;
+};
+
+legend.addTo(map);
+
 /* Earth Tectonic Plates
  *  Description: Add a layer for tectonic plates
  *
