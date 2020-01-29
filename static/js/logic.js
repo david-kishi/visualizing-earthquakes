@@ -121,8 +121,27 @@ function markerSize(magnitude) {
     return magnitude * 2;
 };
 
+/* markerColor
+ *  Description: function to return color based on magnitude
+ */
+function markerColor(magnitude) {
+    if (magnitude >= 5){
+        return "#ff0000";   // Red
+    }else if (magnitude >= 4){
+        return "#ff6600";   // Light Red
+    }else if (magnitude >= 3){
+        return "#ff9933";   // Orange
+    }else if (magnitude >= 2){
+        return "#ffcc00";   // Light Orange
+    }else if (magnitude >= 1){
+        return "#ffff00";   // Yellow
+    }else{
+        return "#00ff00";    // Green
+    }
+};
+
 // d3 converters for epoch time
-var dateFormat = d3.timeFormat("%x %X")
+var dateFormat = d3.timeFormat("%x %X");
 
 // Hour
 d3.json(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson`).then(data => {
@@ -132,8 +151,8 @@ d3.json(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
                 return L.circleMarker(latlng, {
                     stroke: false,
                     fillOpacity: 0.5,
-                    color: "red",
-                    fillColor: "red",
+                    color: markerColor(feature.properties.mag),
+                    fillColor: markerColor(feature.properties.mag),
                     radius: markerSize(feature.properties.mag)
                 });
             },
@@ -160,8 +179,8 @@ d3.json(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojs
                 return L.circleMarker(latlng, {
                     stroke: false,
                     fillOpacity: 0.5,
-                    color: "red",
-                    fillColor: "red",
+                    color: markerColor(feature.properties.mag),
+                    fillColor: markerColor(feature.properties.mag),
                     radius: markerSize(feature.properties.mag)
                 });
             },
@@ -188,8 +207,8 @@ d3.json(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
                 return L.circleMarker(latlng, {
                     stroke: false,
                     fillOpacity: 0.5,
-                    color: "red",
-                    fillColor: "red",
+                    color: markerColor(feature.properties.mag),
+                    fillColor: markerColor(feature.properties.mag),
                     radius: markerSize(feature.properties.mag)
                 });
             },
@@ -216,8 +235,8 @@ d3.json(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geo
                 return L.circleMarker(latlng, {
                     stroke: false,
                     fillOpacity: 0.5,
-                    color: "red",
-                    fillColor: "red",
+                    color: markerColor(feature.properties.mag),
+                    fillColor: markerColor(feature.properties.mag),
                     radius: markerSize(feature.properties.mag)
                 });
             },
