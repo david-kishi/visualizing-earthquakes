@@ -1,5 +1,5 @@
 # Earthquake Map Visualizer
-Visualizing earthquakes in North Americausing United States Geological Survey within the last 30 days, 7 days, day, and hour.
+Visualizing earthquakes in North America using United States Geological Survey within the last 30 days, 7 days, day, and hour.
 
 ![Earthquake Visualization](imgs/EarthquakeVisualization.png)
 
